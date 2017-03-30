@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <style>
+        form {
+            width: 50%;
+            margin-left: 10%;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <!--Set Cookie-->
+    <div>
+        <div class="title">Set Cookie</div>
+        <div class="form-group">
+            <label for="cookieName" class="control-label">name: </label>
+            <input type="text" id="cookieName" class="form-control setCookie">
+            <label for="cookieValue" class="control-label">value: </label>
+            <input type="text" id="cookieValue" class="form-control setCookie">
+            <label for="cookieTime" class="control-label">time (s): </label>
+            <input type="text" id="cookieTime" class="form-control setCookie">
+        </div>
+    </div>
+    <!--Get Cookie-->
+    <div>
+        <div class="title">Get Cookie</div>
+        <div class="form-group">
+            <label for="getCookie" class="control-label">name: </label>
+            <input type="text" id="getCookie" class="form-control" >
+        </div>
+    </div>
+    <!--Del Cookie-->
+    <div>
+        <div class="form-group">
+            <div class="title">Delete Cookie</div>
+            <label for="deleteCookie" class="control-label">name: </label>
+            <input type="text" id="deleteCookie" class="form-control" onchange="DelCookie()">
+        </div>
+    </div>
+</form>
+<script src="app.js"></script>
+</body>
+</html>
