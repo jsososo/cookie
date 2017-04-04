@@ -45,14 +45,14 @@ function setCookie(name, value, time) {
     var t = new Date();
     t.setTime(t.getTime() + parseInt(time));
 
-    document.cookie = name + '=' + value + ' ;expires=' + t.toGMTString();
+    document.cookie = name + '=' + escape(value) + ' ;expires=' + t.toGMTString();
 }
 
 function GetCookie(name) {
     var arr, reg = new RegExp('(^|)' + name + '=([^;]*)(;|$)');
 
     if (arr = document.cookie.match(reg)) {
-        return arr[2];
+        return unescape(arr[2]);
     } else {
         alert ('Not Found');
     }
