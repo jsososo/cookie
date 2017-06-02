@@ -23,10 +23,21 @@ for (var i in s) {
 }
 
 function inputCookie(k) {
-    if (k == 13) {
-        //check the value is set
-        setCookie(s[0].value, s[1].value, s[2].value *1000);
-        console.log(document.cookie);
+    if (k == 13 ) {
+        if (s[0].value !== undefined) {
+            if (s[1].value !== undefined) {
+                if (s[2].value > 0) {
+                    setCookie(s[0].value, s[1].value, s[2].value *1000);
+                    alert (`Success ! \nCookie's name: ${s[0].value} \nCookie's value: ${s[1].value} \nCookie's expires time: ${s[2].value}s`);
+                } else {
+                    alert ('input expires time (number)')
+                }
+            } else {
+                alert ('input the value');
+            }
+        } else {
+            alert ('input the name');
+        }
     }
 }
 
