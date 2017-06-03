@@ -2,54 +2,60 @@
  * Created by soso on 2017/3/30.
  */
 
-const g = document.getElementById('getCookie');
-const s = document.getElementsByClassName('setCookie');
-const d = document.getElementById('deleteCookie');
+const [g, s, d, b] = [document.getElementById('getCookie'), Array.from(document.getElementsByClassName('setCookie')), document.getElementById('deleteCookie'), document.getElementById('numBtn')];
 
 let r;
 //Get cookie
-g.onkeydown = function (e) {
-    if (e.keyCode == 13) {
-        if (r = GetCookie(g.value)) {
-            alert (r);
-        }
+g.onkeydown = (e) => {
+    if (e.keyCode ===  13 && (r = GetCookie(g.value))) {
+        alert (r);
     }
 };
-//Set cookie
-for (let i in s) {
-    s[i].onkeydown = function (e) {
-        inputCookie(e.keyCode);
-    };
-}
 
-function inputCookie(k) {
-    if (k === 13 ) {
-        if (s[0].value !== '') {
-            if (s[1].value !== '') {
-                if (!isNaN(s[2].value) && s[2].value > 0) { // is number and bigger than 0
-                    setCookie(s[0].value, s[1].value, s[2].value);
-                    alert (`Setting Success ! \nCookie's name: ${s[0].value} \nCookie's value: ${s[1].value} \nCookie's expires time: ${s[2].value}s`);
-                    [s[0].value, s[1].value, s[2].value] = ['', '', ''];
+//Set cookie
+s.map((item) => {
+    item.onkeydown = (e) => {
+
+        let k = e.keyCode;
+
+        if (k === 13 ) {
+            if (s[0].value !== '') {
+                if (s[1].value !== '') {
+                    if (!isNaN(s[2].value) && s[2].value > 0) { // is number and bigger than 0
+                        setCookie(s[0].value, s[1].value, s[2].value);
+                        alert (`Setting Success ! \nCookie's name: ${s[0].value} \nCookie's value: ${s[1].value} \nCookie's expires time: ${s[2].value}s`);
+                        [s[0].value, s[1].value, s[2].value] = ['', '', ''];
+                    } else {
+                        s[2].focus();
+                        alert ('input expires time ( >0 )')
+                    }
                 } else {
-                    s[2].focus();
-                    alert ('input expires time ( >0 )')
+                    s[1].focus();
+                    alert ('input the value');
                 }
             } else {
-                s[1].focus();
-                alert ('input the value');
+                s[0].focus();
+                alert ('input the name');
             }
-        } else {
-            s[0].focus();
-            alert ('input the name');
         }
-    }
-}
+    };
+});
 
 //Delete cookie
-d.onkeydown = function (e) {
-    if (e.keyCode == 13 && d.value) {
+d.onkeydown = (e) => {
+    if (e.keyCode === 13 && d.value) {
         DelCookie(d.value);
     }
+};
+
+b.onclick = () => {
+    for (let i = 0; i < 1000; i++) {
+        setCookie(i, 'temporary', 10);
+    }
+
+    let allCookies = document.cookie.match(/temporary/g);
+
+    document.getElementById('numCookies').innerText = (allCookies.length === 1000) ? 'more than 1000' : allCookies.length;
 };
 
 function setCookie(name, value, time) {
