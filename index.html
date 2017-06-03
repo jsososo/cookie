@@ -6,7 +6,7 @@
     <link href="bootstrap.min.css" rel="stylesheet">
     <style>
         form {
-            width: 60%;
+            width: 80%;
             margin-left: 10%;
         }
         .title {
@@ -14,12 +14,27 @@
             font-weight: 900;
             line-height: 40px;
         }
+        .flexContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .flexContainer>div {
+            width: 40%;
+        }
         .info {
-            width: 60%;
+            width: 80%;
             font-size: 16px;
             font-weight: 400;
             margin: 20px 10%;
             color: #666;
+        }
+        .codeBtn {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        pre {
+            display: none;
         }
     </style>
 </head>
@@ -30,29 +45,73 @@
     <!--Set Cookie-->
     <div>
         <div class="title">Set Cookie</div>
-        <div class="form-group">
-            <label for="cookieName" class="control-label">name: </label>
-            <input type="text" id="cookieName" class="form-control setCookie">
-            <label for="cookieValue" class="control-label">value: </label>
-            <input type="text" id="cookieValue" class="form-control setCookie">
-            <label for="cookieTime" class="control-label">time (s): </label>
-            <input type="text" id="cookieTime" class="form-control setCookie">
+        <div class="flexContainer">
+            <div class="form-group">
+                <label for="cookieName" class="control-label">name: </label>
+                <input type="text" id="cookieName" class="form-control setCookie">
+                <label for="cookieValue" class="control-label">value: </label>
+                <input type="text" id="cookieValue" class="form-control setCookie">
+                <label for="cookieTime" class="control-label">time (s): </label>
+                <input type="text" id="cookieTime" class="form-control setCookie">
+            </div>
+            <div class="code">
+                <div class="codeBtn">show code</div>
+                <pre>function setCookie(name, value, time) {
+    //Expiration time
+    let t = new Date();
+
+    t.setSeconds(t.getSeconds() + parseInt(time));
+    document.cookie = `${name}=${escape(value)};expires=${t.toGMTString()};`;
+}</pre>
+            </div>
         </div>
     </div>
     <!--Get Cookie-->
     <div>
         <div class="title">Get Cookie</div>
-        <div class="form-group">
-            <label for="getCookie" class="control-label">name: </label>
-            <input type="text" id="getCookie" class="form-control" >
+        <div class="flexContainer">
+            <div class="form-group">
+                <label for="getCookie" class="control-label">name: </label>
+                <input type="text" id="getCookie" class="form-control" >
+            </div>
+            <div class="code">
+                <div class="codeBtn">show code</div>
+                <pre>function GetCookie(name) {
+    let reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+    let arr = document.cookie.match(reg);
+
+    if (arr) {
+        return unescape(arr[2]);
+    } else {
+        alert ('Not Found');
+    }
+}</pre>
+            </div>
         </div>
     </div>
     <!--Del Cookie-->
     <div>
-        <div class="form-group">
-            <div class="title">Delete Cookie</div>
-            <label for="deleteCookie" class="control-label">name: </label>
-            <input type="text" id="deleteCookie" class="form-control" onchange="DelCookie()">
+        <div class="title">Delete Cookie</div>
+        <div class="flexContainer">
+            <div class="form-group">
+                <label for="deleteCookie" class="control-label">name: </label>
+                <input type="text" id="deleteCookie" class="form-control">
+            </div>
+            <div class="code">
+                <div class="codeBtn">show code</div>
+                <pre>function DelCookie(name) {
+    let t = new Date();
+    t.setTime(-1);
+
+    let c;
+
+    if (c = GetCookie(name)) {
+        document.cookie = `${name}=${c};expires=${t.toGMTString()};`;
+        d.value = '';
+        alert ('Delete Success !');
+    }
+}</pre>
+            </div>
         </div>
     </div>
 

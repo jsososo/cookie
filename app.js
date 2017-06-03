@@ -2,17 +2,18 @@
  * Created by soso on 2017/3/30.
  */
 
-const [g, s, d, b] = [document.getElementById('getCookie'), Array.from(document.getElementsByClassName('setCookie')), document.getElementById('deleteCookie'), document.getElementById('numBtn')];
+const [g, s, d, b, c] = [document.getElementById('getCookie'), Array.from(document.getElementsByClassName('setCookie')),
+    document.getElementById('deleteCookie'), document.getElementById('numBtn'), Array.from(document.getElementsByClassName('codeBtn'))];
 
 let r;
-//Get cookie
+// Get cookie
 g.onkeydown = (e) => {
     if (e.keyCode ===  13 && (r = GetCookie(g.value))) {
         alert (r);
     }
 };
 
-//Set cookie
+// Set cookie
 s.map((item) => {
     item.onkeydown = (e) => {
 
@@ -41,13 +42,14 @@ s.map((item) => {
     };
 });
 
-//Delete cookie
+// Delete cookie
 d.onkeydown = (e) => {
     if (e.keyCode === 13 && d.value) {
         DelCookie(d.value);
     }
 };
 
+// Test how many cookies can be stored
 b.onclick = () => {
     for (let i = 0; i < 1000; i++) {
         setCookie(i, 'temporary', 10);
@@ -58,6 +60,20 @@ b.onclick = () => {
     document.getElementById('numCookies').innerText = (allCookies.length === 1000) ? 'more than 1000' : allCookies.length;
 };
 
+// click to show or hide the code
+c.map((item) => {
+    item.onclick = () => {
+        let p = item.nextElementSibling;
+        if (item.innerHTML === 'show code') {
+            item.innerHTML = 'hide code';
+            p.style.display = 'block';
+        } else {
+            item.innerHTML = 'show code';
+            p.style.display = 'none';
+        }
+    }
+});
+
 function setCookie(name, value, time) {
     //Expiration time
     let t = new Date();
@@ -67,7 +83,7 @@ function setCookie(name, value, time) {
 }
 
 function GetCookie(name) {
-    let reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
+    let reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
     let arr = document.cookie.match(reg);
 
     if (arr) {
