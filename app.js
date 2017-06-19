@@ -79,11 +79,11 @@ function setCookie(name, value, time) {
     let t = new Date();
 
     t.setSeconds(t.getSeconds() + parseInt(time));
-    document.cookie = `${name}=${escape(value)};expires=${t.toGMTString()};`;
+    document.cookie = `${escape(name)}=${escape(value)};expires=${t.toGMTString()};`;
 }
 
 function GetCookie(name) {
-    let reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+    let reg = new RegExp(`(^| )${escape(name)}=([^;]*)(;|$)`);
     let arr = document.cookie.match(reg);
 
     if (arr) {
