@@ -61,7 +61,7 @@
     let t = new Date();
 
     t.setSeconds(t.getSeconds() + parseInt(time));
-    document.cookie = `${name}=${escape(value)};expires=${t.toGMTString()};`;
+    document.cookie = `${eacape(name)}=${escape(value)};expires=${t.toGMTString()};`;
 }</pre>
             </div>
         </div>
@@ -77,7 +77,7 @@
             <div class="code">
                 <div class="codeBtn">show code</div>
                 <pre>function GetCookie(name) {
-    let reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+    let reg = new RegExp(`(^| )${escape(name)}=([^;]*)(;|$)`);
     let arr = document.cookie.match(reg);
 
     if (arr) {
@@ -106,7 +106,7 @@
     let c;
 
     if (c = GetCookie(name)) {
-        document.cookie = `${name}=${c};expires=${t.toGMTString()};`;
+        document.cookie = `${escape(name)}=;expires=${t.toGMTString()};`;
         d.value = '';
         alert ('Delete Success !');
     }

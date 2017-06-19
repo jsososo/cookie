@@ -100,7 +100,7 @@ function DelCookie(name) {
     let c;
 
     if (c = GetCookie(name)) {
-        document.cookie = `${name}=${c};expires=${t.toGMTString()};`;
+        document.cookie = `${escape(name)}=;expires=${t.toGMTString()};`;
         d.value = '';
         alert ('Delete Success !');
     }
