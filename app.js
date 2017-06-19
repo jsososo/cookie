@@ -51,13 +51,13 @@ d.onkeydown = (e) => {
 
 // Test how many cookies can be stored
 b.onclick = () => {
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 300; i++) {
         setCookie(i, 'temporary', 10);
     }
 
     let allCookies = document.cookie.match(/temporary/g);
 
-    document.getElementById('numCookies').innerText = (allCookies.length === 200) ? 'more than 200' : allCookies.length;
+    document.getElementById('numCookies').innerText = (allCookies.length === 300) ? 'more than 300' : allCookies.length;
 };
 
 // click to show or hide the code
